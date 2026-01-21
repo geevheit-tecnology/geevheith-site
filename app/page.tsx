@@ -333,22 +333,35 @@ export default function Home() {
             <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
               Getulio Moreira
             </span>
-            , fundador da Geevheith Technology Solutions. Possuo formação em{" "}
+            , fundador da Geevheith Technology Solutions. Sou formado em{" "}
             <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
               Ciências da Computação
             </span>{" "}
-            e sou estudante de{" "}
+            e atualmente estudante de{" "}
             <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
               Engenharia de Software
             </span>
-            .
+            , com foco no desenvolvimento de soluções tecnológicas modernas e
+            escaláveis.
           </p>
           <p
             style={{ fontSize: "1.05rem", color: "#cbd5e1", lineHeight: "1.6" }}
           >
-            Minha paixão é criar soluções digitais inovadoras e escaláveis que
-            transformam ideias em produtos reais, com foco em qualidade,
-            performance e segurança.
+            Possuo especialização no desenvolvimento de aplicativos para{" "}
+            <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
+              Android e iOS
+            </span>
+            , além da criação de sistemas web, sites profissionais e landing
+            pages orientadas à conversão. Atuo desde o planejamento da solução
+            até a entrega final, sempre aplicando boas práticas de engenharia de
+            software, arquitetura limpa e foco em performance e segurança.
+          </p>
+          <p
+            style={{ fontSize: "1.05rem", color: "#cbd5e1", lineHeight: "1.6" }}
+          >
+            Minha paixão é transformar ideias em produtos digitais reais,
+            confiáveis e eficientes, ajudando empresas e profissionais a
+            crescerem por meio da tecnologia, inovação e design funcional.
           </p>
         </div>
       </section>
