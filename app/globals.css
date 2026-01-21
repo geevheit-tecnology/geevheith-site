@@ -21,25 +21,3 @@ body {
 code {
   font-family: var(--font-geist-mono), monospace;
 }
-
-@layer components {
-  .container-custom {
-    @apply max-w-6xl mx-auto;
-  }
-
-  .btn-primary {
-    @apply bg-gradient-to-r from-cyan-500 to-blue-500 text-slate-950 px-8 py-4 rounded-lg font-bold transition-all duration-300;
-  }
-
-  .btn-primary:hover {
-    @apply shadow-lg shadow-cyan-500/50;
-  }
-
-  .gradient-text {
-    @apply bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent;
-  }
-
-  .card-glass {
-    @apply bg-slate-800/50 backdrop-blur border border-cyan-500/20 rounded-2xl;
-  }
-}
