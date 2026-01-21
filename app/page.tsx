@@ -13,12 +13,45 @@ export default function Home() {
         @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1); } 50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), inset 0 0 30px rgba(34, 211, 238, 0.15); } }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         .fade-up { animation: slideUp 0.8s ease-out; }
         .service-card { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(34, 211, 238, 0.4); background: linear-gradient(135deg, rgba(51, 65, 85, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%); position: relative; overflow: hidden; }
         .service-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(34, 211, 238, 0.1) 50%, transparent 70%); transform: rotate(45deg); animation: shimmer 3s infinite; }
         @keyframes shimmer { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
         .service-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(34, 211, 238, 0.8); box-shadow: 0 20px 50px rgba(34, 211, 238, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(59, 130, 246, 0.2); animation: glow 2s ease-in-out infinite; }
         .hover-lift { transition: all 0.3s ease; }
+        .menu-link {
+          position: relative;
+          color: #cbd5e1;
+          text-decoration: none;
+          cursor: pointer;
+          padding-bottom: 2px;
+          background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
+          background-size: 200% 200%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: color 0.2s;
+        }
+        .menu-link::after {
+          content: '';
+          position: absolute;
+          left: 0; right: 0; bottom: -2px;
+          height: 3px;
+          border-radius: 2px;
+          background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
+          background-size: 200% 200%;
+          background-position: 0% 50%;
+          opacity: 0;
+          transition: opacity 0.3s, background-position 0.6s;
+        }
+        .menu-link:hover {
+          animation: gradientMove 1.5s linear infinite alternate;
+        }
+        .menu-link:hover::after {
+          opacity: 1;
+          background-position: 100% 50%;
+        }
       `}</style>
 
       {/* Header */}
@@ -66,34 +99,13 @@ export default function Home() {
             </h1>
           </div>
           <nav style={{ display: "flex", gap: "2rem", fontSize: "0.9rem" }}>
-            <a
-              href="#services"
-              style={{
-                color: "#cbd5e1",
-                textDecoration: "none",
-                cursor: "pointer",
-              }}
-            >
+            <a href="#services" className="menu-link">
               Serviços
             </a>
-            <a
-              href="#about"
-              style={{
-                color: "#cbd5e1",
-                textDecoration: "none",
-                cursor: "pointer",
-              }}
-            >
+            <a href="#about" className="menu-link">
               Sobre
             </a>
-            <a
-              href="#contact"
-              style={{
-                color: "#cbd5e1",
-                textDecoration: "none",
-                cursor: "pointer",
-              }}
-            >
+            <a href="#contact" className="menu-link">
               Contato
             </a>
           </nav>
@@ -278,10 +290,11 @@ export default function Home() {
           padding: "4rem 2rem",
           maxWidth: "1200px",
           margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          display: "flex",
+          flexWrap: "wrap",
           gap: "3rem",
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <div
@@ -290,6 +303,13 @@ export default function Home() {
             borderRadius: "1rem",
             overflow: "hidden",
             background: "linear-gradient(to bottom right, #22d3ee, #3b82f6)",
+            minWidth: 0,
+            flex: "0 1 500px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "500px",
+            maxWidth: "500px",
           }}
         >
           <Image
@@ -297,13 +317,23 @@ export default function Home() {
             alt="Getulio"
             width={500}
             height={500}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </div>
         <div
-          style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.5rem",
+            flex: "0 1 500px",
+            maxWidth: "500px",
+            minWidth: 0,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "500px",
+          }}
         >
-          <div>
+          <div style={{ width: "100%", textAlign: "center" }}>
             <h3
               style={{
                 fontSize: "2.5rem",
@@ -323,6 +353,7 @@ export default function Home() {
                 width: "100px",
                 background: "linear-gradient(to right, #22d3ee, #3b82f6)",
                 borderRadius: "2px",
+                margin: "0 auto",
               }}
             ></div>
           </div>
@@ -540,6 +571,53 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+          {/* Google Forms */}
+          <div
+            style={{
+              margin: "2rem auto 0 auto",
+              maxWidth: 350,
+              background: "rgba(15,23,42,0.7)",
+              borderRadius: 10,
+              boxShadow: "0 2px 12px rgba(34,211,238,0.08)",
+              padding: "0.75rem 1rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <p
+              style={{
+                textAlign: "center",
+                color: "#cbd5e1",
+                fontSize: "0.98rem",
+                marginBottom: "0.7rem",
+              }}
+            >
+              Deseja um orçamento? Responda nosso formulário para entendermos
+              sua necessidade.
+            </p>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSey4qxZ_fZpSRj72xZv_ZR_C-uVnmRRT_lqjPfeDvT7jN8SJg/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                margin: "0 auto",
+                padding: "0.6rem 1.2rem",
+                background: "linear-gradient(90deg, #22d3ee, #3b82f6)",
+                color: "#0f172a",
+                fontWeight: "bold",
+                borderRadius: "8px",
+                textDecoration: "none",
+                boxShadow: "0 2px 8px rgba(34,211,238,0.10)",
+                fontSize: "0.95rem",
+                transition: "all 0.2s",
+                textAlign: "center",
+              }}
+            >
+              Abrir formulário
+            </a>
           </div>
         </div>
       </section>
