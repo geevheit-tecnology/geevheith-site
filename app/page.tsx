@@ -12,8 +12,12 @@ export default function Home() {
       <style>{`
         @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1); } 50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), inset 0 0 30px rgba(34, 211, 238, 0.15); } }
         .fade-up { animation: slideUp 0.8s ease-out; }
-        .hover-lift:hover { box-shadow: 0 20px 40px rgba(34, 211, 238, 0.3); transform: translateY(-5px); }
+        .service-card { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(34, 211, 238, 0.4); background: linear-gradient(135deg, rgba(51, 65, 85, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%); position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(34, 211, 238, 0.1) 50%, transparent 70%); transform: rotate(45deg); animation: shimmer 3s infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
+        .service-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(34, 211, 238, 0.8); box-shadow: 0 20px 50px rgba(34, 211, 238, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(59, 130, 246, 0.2); animation: glow 2s ease-in-out infinite; }
         .hover-lift { transition: all 0.3s ease; }
       `}</style>
 
@@ -23,9 +27,11 @@ export default function Home() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          background: "rgba(15, 23, 42, 0.8)",
-          backdropFilter: "blur(10px)",
-          borderBottom: "1px solid rgba(34, 211, 238, 0.2)",
+          background: "rgba(15, 23, 42, 0.9)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "2px solid rgba(34, 211, 238, 0.4)",
+          boxShadow:
+            "0 4px 30px rgba(34, 211, 238, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
         }}
       >
         <div
@@ -157,7 +163,7 @@ export default function Home() {
           }}
         >
           <Image
-            src="/fotoapresentacao01.jpg"
+            src="/fotoapresentacao03.jpg"
             alt="Tecnologia"
             width={500}
             height={400}
@@ -172,8 +178,9 @@ export default function Home() {
         style={{
           padding: "4rem 2rem",
           background: "rgba(30, 41, 59, 0.5)",
-          borderTop: "1px solid rgba(34, 211, 238, 0.2)",
-          borderBottom: "1px solid rgba(34, 211, 238, 0.2)",
+          borderTop: "2px solid rgba(34, 211, 238, 0.5)",
+          borderBottom: "2px solid rgba(34, 211, 238, 0.5)",
+          boxShadow: "inset 0 0 50px rgba(34, 211, 238, 0.1)",
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -222,31 +229,42 @@ export default function Home() {
             ].map((service, idx) => (
               <div
                 key={idx}
-                className="hover-lift"
+                className="service-card"
                 style={{
-                  background: "rgba(51, 65, 85, 0.5)",
-                  border: "1px solid rgba(34, 211, 238, 0.3)",
                   padding: "2rem",
-                  borderRadius: "1rem",
-                  backdropFilter: "blur(10px)",
+                  borderRadius: "1.2rem",
+                  backdropFilter: "blur(15px)",
+                  position: "relative",
+                  zIndex: 1,
                 }}
               >
-                <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-                  {service.icon}
+                <div style={{ position: "relative", zIndex: 2 }}>
+                  <div style={{ fontSize: "3rem", marginBottom: "1.5rem" }}>
+                    {service.icon}
+                  </div>
+                  <h4
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: "bold",
+                      background: "linear-gradient(to right, #22d3ee, #06b6d4)",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      marginBottom: "0.75rem",
+                    }}
+                  >
+                    {service.title}
+                  </h4>
+                  <p
+                    style={{
+                      color: "#cbd5e1",
+                      fontSize: "0.95rem",
+                      lineHeight: "1.5",
+                    }}
+                  >
+                    {service.desc}
+                  </p>
                 </div>
-                <h4
-                  style={{
-                    fontSize: "1.2rem",
-                    fontWeight: "bold",
-                    color: "#22d3ee",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {service.title}
-                </h4>
-                <p style={{ color: "#cbd5e1", fontSize: "0.95rem" }}>
-                  {service.desc}
-                </p>
               </div>
             ))}
           </div>
@@ -341,7 +359,8 @@ export default function Home() {
         style={{
           padding: "4rem 2rem",
           background: "rgba(30, 41, 59, 0.5)",
-          borderTop: "1px solid rgba(34, 211, 238, 0.2)",
+          borderTop: "2px solid rgba(34, 211, 238, 0.5)",
+          boxShadow: "inset 0 0 50px rgba(34, 211, 238, 0.1)",
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -370,133 +389,143 @@ export default function Home() {
           >
             {/* Card Foto */}
             <div
-              className="hover-lift"
+              className="service-card"
               style={{
-                background: "rgba(51, 65, 85, 0.5)",
-                border: "1px solid rgba(34, 211, 238, 0.3)",
                 padding: "2rem",
-                borderRadius: "1rem",
-                backdropFilter: "blur(10px)",
+                borderRadius: "1.2rem",
+                backdropFilter: "blur(15px)",
                 textAlign: "center",
+                position: "relative",
+                zIndex: 1,
               }}
             >
-              <Image
-                src="/foto03site.jpg"
-                alt="Getulio"
-                width={200}
-                height={200}
-                style={{
-                  width: "180px",
-                  height: "180px",
-                  borderRadius: "50%",
-                  margin: "0 auto 1rem",
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  border: "2px solid rgba(34, 211, 238, 0.3)",
-                }}
-              />
-              <p
-                style={{
-                  fontSize: "1.2rem",
-                  color: "#22d3ee",
-                  fontWeight: "bold",
-                  marginBottom: "0.25rem",
-                }}
-              >
-                Getulio Moreira
-              </p>
-              <p style={{ color: "#94a3b8", fontSize: "0.9rem" }}>
-                Fundador & Desenvolvedor Sênior
-              </p>
+              <div style={{ position: "relative", zIndex: 2 }}>
+                <Image
+                  src="/foto03site.jpg"
+                  alt="Getulio"
+                  width={200}
+                  height={200}
+                  style={{
+                    width: "180px",
+                    height: "180px",
+                    borderRadius: "50%",
+                    margin: "0 auto 1.5rem",
+                    objectFit: "cover",
+                    objectPosition: "top",
+                    border: "3px solid rgba(34, 211, 238, 0.6)",
+                    boxShadow: "0 0 30px rgba(34, 211, 238, 0.3)",
+                  }}
+                />
+                <p
+                  style={{
+                    fontSize: "1.3rem",
+                    background: "linear-gradient(to right, #22d3ee, #06b6d4)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    fontWeight: "bold",
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  Getulio Moreira
+                </p>
+                <p style={{ color: "#94a3b8", fontSize: "0.9rem" }}>
+                  Fundador & Desenvolvedor Sênior
+                </p>
+              </div>
             </div>
             {/* Card Info */}
             <div
-              className="hover-lift"
+              className="service-card"
               style={{
-                background: "rgba(51, 65, 85, 0.5)",
-                border: "1px solid rgba(34, 211, 238, 0.3)",
                 padding: "2rem",
-                borderRadius: "1rem",
-                backdropFilter: "blur(10px)",
+                borderRadius: "1.2rem",
+                backdropFilter: "blur(15px)",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                position: "relative",
+                zIndex: 1,
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1.5rem",
-                }}
-              >
-                <div style={{ display: "flex", gap: "1rem" }}>
-                  <span style={{ fontSize: "1.5rem" }}>📞</span>
-                  <div>
-                    <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                      Telefone
-                    </p>
-                    <a
-                      href="tel:+5511972808075"
-                      style={{
-                        color: "#22d3ee",
-                        fontWeight: "bold",
-                        textDecoration: "none",
-                      }}
-                    >
-                      (11) 97280-8075
-                    </a>
+              <div style={{ position: "relative", zIndex: 2 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1.5rem",
+                  }}
+                >
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <span style={{ fontSize: "1.5rem" }}>📞</span>
+                    <div>
+                      <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
+                        Telefone
+                      </p>
+                      <a
+                        href="tel:+5511972808075"
+                        style={{
+                          color: "#22d3ee",
+                          fontWeight: "bold",
+                          textDecoration: "none",
+                        }}
+                      >
+                        (11) 97280-8075
+                      </a>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <span style={{ fontSize: "1.5rem" }}>📧</span>
+                    <div>
+                      <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
+                        Email
+                      </p>
+                      <a
+                        href="mailto:getuliomoreira.engsoftware@gmail.com"
+                        style={{
+                          color: "#22d3ee",
+                          fontWeight: "bold",
+                          textDecoration: "none",
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        getuliomoreira.engsoftware@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <span style={{ fontSize: "1.5rem" }}>📍</span>
+                    <div>
+                      <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
+                        Localização
+                      </p>
+                      <p style={{ color: "#cbd5e1", fontWeight: "bold" }}>
+                        São Paulo - SP, Brasil
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div style={{ display: "flex", gap: "1rem" }}>
-                  <span style={{ fontSize: "1.5rem" }}>📧</span>
-                  <div>
-                    <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                      Email
-                    </p>
-                    <a
-                      href="mailto:getuliomoreira.engsoftware@gmail.com"
-                      style={{
-                        color: "#22d3ee",
-                        fontWeight: "bold",
-                        textDecoration: "none",
-                        fontSize: "0.9rem",
-                      }}
-                    >
-                      getuliomoreira.engsoftware@gmail.com
-                    </a>
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: "1rem" }}>
-                  <span style={{ fontSize: "1.5rem" }}>📍</span>
-                  <div>
-                    <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                      Localização
-                    </p>
-                    <p style={{ color: "#cbd5e1", fontWeight: "bold" }}>
-                      São Paulo - SP, Brasil
-                    </p>
-                  </div>
+                <div style={{ position: "relative", zIndex: 2 }}>
+                  <a
+                    href="mailto:getuliomoreira.engsoftware@gmail.com"
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      background: "linear-gradient(to right, #06b6d4, #3b82f6)",
+                      color: "#0f172a",
+                      padding: "1rem",
+                      borderRadius: "8px",
+                      fontWeight: "bold",
+                      textDecoration: "none",
+                      marginTop: "1rem",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    Enviar Email
+                  </a>
                 </div>
               </div>
-              <a
-                href="mailto:getuliomoreira.engsoftware@gmail.com"
-                style={{
-                  display: "block",
-                  textAlign: "center",
-                  background: "linear-gradient(to right, #06b6d4, #3b82f6)",
-                  color: "#0f172a",
-                  padding: "1rem",
-                  borderRadius: "8px",
-                  fontWeight: "bold",
-                  textDecoration: "none",
-                  marginTop: "1rem",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                Enviar Email
-              </a>
             </div>
           </div>
         </div>
@@ -509,7 +538,9 @@ export default function Home() {
           textAlign: "center",
           color: "#64748b",
           fontSize: "0.9rem",
-          borderTop: "1px solid rgba(34, 211, 238, 0.2)",
+          borderTop: "2px solid rgba(34, 211, 238, 0.4)",
+          background: "rgba(15, 23, 42, 0.8)",
+          boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.1)",
         }}
       >
         <p style={{ marginBottom: "0.5rem" }}>
