@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +23,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <style>{`
+          @tailwind base;
+          @tailwind components;
+          @tailwind utilities;
+          
+          html {
+            scroll-behavior: smooth;
+          }
+          
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          
+          body {
+            background: linear-gradient(to bottom, rgb(15, 23, 42), rgb(15, 23, 42));
+            color: rgb(241, 245, 249);
+          }
+          
+          code {
+            font-family: var(--font-geist-mono), monospace;
+          }
+        `}</style>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-slate-100`}
       >
