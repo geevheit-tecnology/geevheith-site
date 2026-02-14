@@ -533,7 +533,7 @@ export default function Home() {
                           fontSize: "0.9rem",
                         }}
                       >
-                        getuliomoreira.engsoftware@gmail.com
+                        geevheitmoreira@gmail.com
                       </a>
                     </div>
                   </div>
