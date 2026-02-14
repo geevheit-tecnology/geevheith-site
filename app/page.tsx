@@ -504,7 +504,7 @@ export default function Home() {
                     <span style={{ fontSize: "1.5rem" }}>📞</span>
                     <div>
                       <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                        Telefone
+                        Telefone e WhatsApp
                       </p>
                       <a
                         href="tel:+5511972808075"
@@ -594,7 +594,7 @@ export default function Home() {
                 marginBottom: "0.7rem",
               }}
             >
-              Deseja um orçamento? Responda nosso formulário para entendermos
+              Deseja um orçamento? Responda nosso formulário para entendermos melhor
               sua necessidade.
             </p>
             <a
@@ -635,7 +635,7 @@ export default function Home() {
         }}
       >
         <p style={{ marginBottom: "0.5rem" }}>
-          © {new Date().getFullYear()} Geevheith Technology Solutions. Todos os
+          © {new Date().getFullYear()} Geevheith Software Solutions. Todos os
           direitos reservados.
         </p>
         <p style={{ fontSize: "0.85rem", color: "#475569" }}>
