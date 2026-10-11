@@ -1,647 +1,209 @@
 import Image from "next/image";
+import LeadForm from "./LeadForm";
+import Parallax from "./Parallax";
+
+const WA_LINK =
+  "https://wa.me/5511972808075?text=" +
+  encodeURIComponent("Olá! Vi o site da Geevheit Software Solutions e gostaria de um orçamento.");
+const EMAIL = "geevheittecnology@gmail.com";
+
+const services = [
+  { icon: "📱", title: "Aplicativos", desc: "Apps Android e iOS para levar seu negócio ao bolso do cliente." },
+  { icon: "🌐", title: "Sistemas Web", desc: "Plataformas sob medida para automatizar e escalar sua operação." },
+  { icon: "💻", title: "Sites Profissionais", desc: "Sites rápidos, responsivos e otimizados para o Google." },
+  { icon: "🚀", title: "Landing Pages", desc: "Páginas focadas em conversão para transformar visitas em clientes." },
+];
+
+const steps = [
+  { t: "Conversa inicial", d: "Entendemos seu objetivo, sem compromisso." },
+  { t: "Proposta clara", d: "Escopo, prazo e valor definidos antes de começar." },
+  { t: "Desenvolvimento", d: "Você acompanha cada etapa até a entrega." },
+  { t: "Suporte", d: "Acompanhamento após a publicação." },
+];
 
 export default function Home() {
-  return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-        color: "#cbd5e1",
-      }}
-    >
-      <style>{`
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1); } 50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), inset 0 0 30px rgba(34, 211, 238, 0.15); } }
-        @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-        .fade-up { animation: slideUp 0.8s ease-out; }
-        .service-card { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border: 2px solid rgba(34, 211, 238, 0.4); background: linear-gradient(135deg, rgba(51, 65, 85, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%); position: relative; overflow: hidden; }
-        .service-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(34, 211, 238, 0.1) 50%, transparent 70%); transform: rotate(45deg); animation: shimmer 3s infinite; }
-        @keyframes shimmer { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
-        .service-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(34, 211, 238, 0.8); box-shadow: 0 20px 50px rgba(34, 211, 238, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(59, 130, 246, 0.2); animation: glow 2s ease-in-out infinite; }
-        .hover-lift { transition: all 0.3s ease; }
-        .menu-link {
-          position: relative;
-          color: #cbd5e1;
-          text-decoration: none;
-          cursor: pointer;
-          padding-bottom: 2px;
-          background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
-          background-size: 200% 200%;
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          transition: color 0.2s;
-        }
-        .menu-link::after {
-          content: '';
-          position: absolute;
-          left: 0; right: 0; bottom: -2px;
-          height: 3px;
-          border-radius: 2px;
-          background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
-          background-size: 200% 200%;
-          background-position: 0% 50%;
-          opacity: 0;
-          transition: opacity 0.3s, background-position 0.6s;
-        }
-        .menu-link:hover {
-          animation: gradientMove 1.5s linear infinite alternate;
-        }
-        .menu-link:hover::after {
-          opacity: 1;
-          background-position: 100% 50%;
-        }
-      `}</style>
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Geevheit Software Solutions",
+    description: "Desenvolvimento de apps, sistemas web, sites e landing pages.",
+    telephone: "+5511972808075",
+    email: EMAIL,
+    areaServed: "BR",
+    address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressRegion: "SP", addressCountry: "BR" },
+  };
 
-      {/* Header */}
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          background: "rgba(15, 23, 42, 0.9)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "2px solid rgba(34, 211, 238, 0.4)",
-          boxShadow:
-            "0 4px 30px rgba(34, 211, 238, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "1.5rem 2rem",
-            maxWidth: "1200px",
-            margin: "0 auto",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <Image
-              src="/logo.jpg"
-              alt="Logo"
-              width={40}
-              height={40}
-              style={{ borderRadius: "8px" }}
-            />
-            <h1
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-                background: "linear-gradient(to right, #22d3ee, #3b82f6)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Geevheith
-            </h1>
-          </div>
-          <nav style={{ display: "flex", gap: "2rem", fontSize: "0.9rem" }}>
-            <a href="#services" className="menu-link">
-              Serviços
-            </a>
-            <a href="#about" className="menu-link">
-              Sobre
-            </a>
-            <a href="#contact" className="menu-link">
-              Contato
+  return (
+    <>
+      <Parallax />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+      <header className="header">
+        <div className="container header-inner">
+          <a href="#top" className="brand">
+            <Image src="/logo.jpg" alt="Logo Geevheit" width={40} height={40} />
+            <span className="grad-text">Geevheit</span>
+          </a>
+          <nav className="nav" aria-label="Principal">
+            <a href="#services">Serviços</a>
+            <a href="#process">Como funciona</a>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contato</a>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-sm">
+              WhatsApp
             </a>
           </nav>
         </div>
       </header>
 
-      {/* Hero */}
-      <section
-        style={{
-          padding: "4rem 2rem",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "3rem",
-          alignItems: "center",
-        }}
-      >
-        <div
-          className="fade-up"
-          style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
-        >
-          <h2
-            style={{
-              fontSize: "3rem",
-              fontWeight: "900",
-              background:
-                "linear-gradient(to right, #22d3ee, #06b6d4, #3b82f6)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              lineHeight: "1.2",
-            }}
-          >
-            Soluções Digitais Sob Medida
-          </h2>
-          <p
-            style={{ fontSize: "1.1rem", color: "#cbd5e1", lineHeight: "1.6" }}
-          >
-            Desenvolvimento de aplicativos, sistemas web e sites profissionais
-            para impulsionar seu negócio com tecnologia moderna e segura.
-          </p>
-          <a
-            href="#contact"
-            style={{
-              display: "inline-block",
-              background: "linear-gradient(to right, #06b6d4, #3b82f6)",
-              color: "#0f172a",
-              padding: "1rem 2rem",
-              borderRadius: "8px",
-              fontWeight: "bold",
-              textDecoration: "none",
-              width: "fit-content",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-            }}
-          >
-            Fale Conosco
-          </a>
-        </div>
-        <div
-          className="fade-up hover-lift"
-          style={{
-            borderRadius: "1rem",
-            overflow: "hidden",
-            background: "linear-gradient(to bottom right, #22d3ee, #3b82f6)",
-          }}
-        >
-          <Image
-            src="/fotoapresentacao03.jpg"
-            alt="Tecnologia"
-            width={500}
-            height={400}
-            style={{ width: "100%", height: "auto" }}
-          />
-        </div>
-      </section>
-
-      {/* Services */}
-      <section
-        id="services"
-        style={{
-          padding: "4rem 2rem",
-          background: "rgba(30, 41, 59, 0.5)",
-          borderTop: "2px solid rgba(34, 211, 238, 0.5)",
-          borderBottom: "2px solid rgba(34, 211, 238, 0.5)",
-          boxShadow: "inset 0 0 50px rgba(34, 211, 238, 0.1)",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h3
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "900",
-              textAlign: "center",
-              marginBottom: "3rem",
-              background: "linear-gradient(to right, #22d3ee, #3b82f6)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Serviços
-          </h3>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {[
-              {
-                icon: "📱",
-                title: "Desenvolvimento de Apps",
-                desc: "Aplicativos móveis nativos e multiplataforma",
-              },
-              {
-                icon: "🌐",
-                title: "Sistemas Web",
-                desc: "Plataformas web robustas e escaláveis",
-              },
-              {
-                icon: "💻",
-                title: "Criação de Sites",
-                desc: "Websites modernos e responsivos",
-              },
-              {
-                icon: "🚀",
-                title: "Landing Pages",
-                desc: "Páginas de destaque de alto desempenho",
-              },
-            ].map((service, idx) => (
-              <div
-                key={idx}
-                className="service-card"
-                style={{
-                  padding: "2rem",
-                  borderRadius: "1.2rem",
-                  backdropFilter: "blur(15px)",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <div style={{ position: "relative", zIndex: 2 }}>
-                  <div style={{ fontSize: "3rem", marginBottom: "1.5rem" }}>
-                    {service.icon}
-                  </div>
-                  <h4
-                    style={{
-                      fontSize: "1.3rem",
-                      fontWeight: "bold",
-                      background: "linear-gradient(to right, #22d3ee, #06b6d4)",
-                      backgroundClip: "text",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    {service.title}
-                  </h4>
-                  <p
-                    style={{
-                      color: "#cbd5e1",
-                      fontSize: "0.95rem",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    {service.desc}
-                  </p>
-                </div>
+      <main id="top">
+        <section className="hero">
+          <div className="blob blob-a" data-parallax="0.25" aria-hidden />
+          <div className="blob blob-b" data-parallax="-0.15" aria-hidden />
+          <div className="container hero-grid">
+            <div className="fade-up">
+              <span className="badge">Orçamento gratuito e sem compromisso</span>
+              <h1 className="grad-text" style={{ fontSize: "clamp(2.2rem,5vw,3.6rem)", fontWeight: 900, lineHeight: 1.1, marginBottom: "1.25rem" }}>
+                Seu negócio online, gerando clientes todos os dias
+              </h1>
+              <p className="lead" style={{ fontSize: "1.15rem", color: "#cbd5e1", marginBottom: "1.75rem", maxWidth: 560 }}>
+                Criamos sites, landing pages, sistemas web e aplicativos sob medida,
+                rápidos e prontos para converter visitantes em clientes.
+              </p>
+              <div className="hero-actions">
+                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
+                  Falar no WhatsApp
+                </a>
+                <a href="#orcamento" className="btn btn-outline">
+                  Pedir orçamento
+                </a>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section
-        id="about"
-        style={{
-          padding: "4rem 2rem",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "3rem",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          className="fade-up hover-lift"
-          style={{
-            borderRadius: "1rem",
-            overflow: "hidden",
-            background: "linear-gradient(to bottom right, #22d3ee, #3b82f6)",
-            minWidth: 0,
-            flex: "0 1 500px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "500px",
-            maxWidth: "500px",
-          }}
-        >
-          <Image
-            src="/fotoapresentacao02.jpg"
-            alt="Getulio"
-            width={500}
-            height={500}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.5rem",
-            flex: "0 1 500px",
-            maxWidth: "500px",
-            minWidth: 0,
-            justifyContent: "center",
-            alignItems: "center",
-            height: "500px",
-          }}
-        >
-          <div style={{ width: "100%", textAlign: "center" }}>
-            <h3
-              style={{
-                fontSize: "2.5rem",
-                fontWeight: "900",
-                background: "linear-gradient(to right, #22d3ee, #3b82f6)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Sobre o Fundador
-            </h3>
-            <div
-              style={{
-                height: "4px",
-                width: "100px",
-                background: "linear-gradient(to right, #22d3ee, #3b82f6)",
-                borderRadius: "2px",
-                margin: "0 auto",
-              }}
-            ></div>
-          </div>
-          <p
-            style={{ fontSize: "1.05rem", color: "#cbd5e1", lineHeight: "1.6" }}
-          >
-            Olá! Sou{" "}
-            <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
-              Getulio Moreira
-            </span>
-            , fundador da Geevheith Technology Solutions. Sou formado em{" "}
-            <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
-              Ciências da Computação
-            </span>{" "}
-            e atualmente estudante de{" "}
-            <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
-              Engenharia de Software
-            </span>
-            , com foco no desenvolvimento de soluções tecnológicas modernas e
-            escaláveis.
-          </p>
-          <p
-            style={{ fontSize: "1.05rem", color: "#cbd5e1", lineHeight: "1.6" }}
-          >
-            Possuo especialização no desenvolvimento de aplicativos para{" "}
-            <span style={{ color: "#22d3ee", fontWeight: "bold" }}>
-              Android e iOS
-            </span>
-            , além da criação de sistemas web, sites profissionais e landing
-            pages orientadas à conversão. Atuo desde o planejamento da solução
-            até a entrega final, sempre aplicando boas práticas de engenharia de
-            software, arquitetura limpa e foco em performance e segurança.
-          </p>
-          <p
-            style={{ fontSize: "1.05rem", color: "#cbd5e1", lineHeight: "1.6" }}
-          >
-            Minha paixão é transformar ideias em produtos digitais reais,
-            confiáveis e eficientes, ajudando empresas e profissionais a
-            crescerem por meio da tecnologia, inovação e design funcional.
-          </p>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section
-        id="contact"
-        style={{
-          padding: "4rem 2rem",
-          background: "rgba(30, 41, 59, 0.5)",
-          borderTop: "2px solid rgba(34, 211, 238, 0.5)",
-          boxShadow: "inset 0 0 50px rgba(34, 211, 238, 0.1)",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h3
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "900",
-              textAlign: "center",
-              marginBottom: "3rem",
-              background: "linear-gradient(to right, #22d3ee, #3b82f6)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Entre em Contato
-          </h3>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "2rem",
-              maxWidth: "900px",
-              margin: "0 auto",
-            }}
-          >
-            {/* Card Foto */}
-            <div
-              className="service-card"
-              style={{
-                padding: "2rem",
-                borderRadius: "1.2rem",
-                backdropFilter: "blur(15px)",
-                textAlign: "center",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <Image
-                  src="/foto03site.jpg"
-                  alt="Getulio"
-                  width={200}
-                  height={200}
-                  style={{
-                    width: "180px",
-                    height: "180px",
-                    borderRadius: "50%",
-                    margin: "0 auto 1.5rem",
-                    objectFit: "cover",
-                    objectPosition: "top",
-                    border: "3px solid rgba(34, 211, 238, 0.6)",
-                    boxShadow: "0 0 30px rgba(34, 211, 238, 0.3)",
-                  }}
-                />
-                <p
-                  style={{
-                    fontSize: "1.3rem",
-                    background: "linear-gradient(to right, #22d3ee, #06b6d4)",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    fontWeight: "bold",
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  Getulio Moreira
-                </p>
-                <p style={{ color: "#94a3b8", fontSize: "0.9rem" }}>
-                  Fundador & Desenvolvedor Sênior
-                </p>
-              </div>
+              <ul className="hero-points">
+                <li>Resposta rápida pelo WhatsApp</li>
+                <li>Design moderno e responsivo (celular e computador)</li>
+                <li>Do planejamento à entrega, com suporte</li>
+              </ul>
             </div>
-            {/* Card Info */}
-            <div
-              className="service-card"
-              style={{
-                padding: "2rem",
-                borderRadius: "1.2rem",
-                backdropFilter: "blur(15px)",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1.5rem",
-                  }}
-                >
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <span style={{ fontSize: "1.5rem" }}>📞</span>
+            <div className="hero-img fade-up" data-parallax="0.08">
+              <Image src="/fotoapresentacao03.jpg" alt="Tecnologia e desenvolvimento" width={600} height={480} priority style={{ width: "100%", height: "auto" }} />
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="section section-alt">
+          <div className="container">
+            <h2 className="section-title grad-text">O que fazemos</h2>
+            <p className="section-sub">Soluções digitais completas para empresas e profissionais.</p>
+            <div className="cards">
+              {services.map((s) => (
+                <article key={s.title} className="card">
+                  <div className="icon" aria-hidden>{s.icon}</div>
+                  <h3 className="grad-text" style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>{s.title}</h3>
+                  <p>{s.desc}</p>
+                </article>
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+              <a href="#orcamento" className="btn btn-primary">Quero um orçamento</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="process" className="section">
+          <div className="container">
+            <h2 className="section-title grad-text">Como funciona</h2>
+            <p className="section-sub">Processo simples e transparente.</p>
+            <div className="steps">
+              {steps.map((s, i) => (
+                <div key={s.t} className="step">
+                  <div className="num">{i + 1}</div>
+                  <h3 style={{ fontSize: "1.05rem" }}>{s.t}</h3>
+                  <p>{s.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="section section-alt">
+          <div className="container about-grid">
+            <div className="about-img" data-parallax="0.06">
+              <Image src="/fotoapresentacao02.jpg" alt="Getulio Moreira, fundador" width={500} height={500} />
+            </div>
+            <div className="about-text">
+              <h2 className="grad-text" style={{ fontSize: "clamp(1.8rem,4vw,2.4rem)", fontWeight: 800, marginBottom: "1rem" }}>
+                Quem vai cuidar do seu projeto
+              </h2>
+              <p>
+                Olá! Sou <b>Getulio Moreira</b>, fundador da Geevheit Software Solutions. Sou formado em{" "}
+                <b>Ciências da Computação</b> e estudante de <b>Engenharia de Software</b>.
+              </p>
+              <p>
+                Especialista em apps <b>Android e iOS</b>, sistemas web, sites profissionais e landing pages
+                orientadas à conversão. Atuo do planejamento à entrega final, com foco em performance e segurança.
+              </p>
+              <p>
+                Minha missão é transformar ideias em produtos digitais confiáveis para que seu negócio cresça.
+              </p>
+              <a href="#orcamento" className="btn btn-primary" style={{ marginTop: "0.5rem" }}>
+                Vamos conversar
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="section">
+          <div className="container">
+            <h2 className="section-title grad-text">Vamos tirar seu projeto do papel?</h2>
+            <p className="section-sub">Preencha o formulário ou fale direto comigo. Respondo rápido.</p>
+            <div className="contact-grid">
+              <LeadForm />
+              <div className="card">
+                <div className="info-list">
+                  <div className="info-item">
+                    <span className="ic">📞</span>
                     <div>
-                      <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                        Telefone e WhatsApp
-                      </p>
-                      <a
-                        href="tel:+5511972808075"
-                        style={{
-                          color: "#22d3ee",
-                          fontWeight: "bold",
-                          textDecoration: "none",
-                        }}
-                      >
-                        (11) 97280-8075
-                      </a>
+                      <small>Telefone e WhatsApp</small>
+                      <a href="tel:+5511972808075">(11) 97280-8075</a>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <span style={{ fontSize: "1.5rem" }}>📧</span>
+                  <div className="info-item">
+                    <span className="ic">📧</span>
                     <div>
-                      <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                        Email
-                      </p>
-                      <a
-                        href="mailto:getuliomoreira.engsoftware@gmail.com"
-                        style={{
-                          color: "#22d3ee",
-                          fontWeight: "bold",
-                          textDecoration: "none",
-                          fontSize: "0.9rem",
-                        }}
-                      >
-                        geevheitmoreira@gmail.com
-                      </a>
+                      <small>E-mail</small>
+                      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <span style={{ fontSize: "1.5rem" }}>📍</span>
+                  <div className="info-item">
+                    <span className="ic">📍</span>
                     <div>
-                      <p style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
-                        Localização
-                      </p>
-                      <p style={{ color: "#cbd5e1", fontWeight: "bold" }}>
-                        São Paulo - SP, Brasil
-                      </p>
+                      <small>Localização</small>
+                      <strong>São Paulo - SP, Brasil</strong>
                     </div>
                   </div>
                 </div>
-                <div style={{ position: "relative", zIndex: 2 }}>
-                  <a
-                    href="mailto:getuliomoreira.engsoftware@gmail.com"
-                    style={{
-                      display: "block",
-                      textAlign: "center",
-                      background: "linear-gradient(to right, #06b6d4, #3b82f6)",
-                      color: "#0f172a",
-                      padding: "1rem",
-                      borderRadius: "8px",
-                      fontWeight: "bold",
-                      textDecoration: "none",
-                      marginTop: "1rem",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    Enviar Email
+                <div className="stack">
+                  <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
+                    Chamar no WhatsApp
                   </a>
+                  <a href={`mailto:${EMAIL}`} className="btn btn-outline">Enviar e-mail</a>
                 </div>
               </div>
             </div>
           </div>
-          {/* Google Forms */}
-          <div
-            style={{
-              margin: "2rem auto 0 auto",
-              maxWidth: 350,
-              background: "rgba(15,23,42,0.7)",
-              borderRadius: 10,
-              boxShadow: "0 2px 12px rgba(34,211,238,0.08)",
-              padding: "0.75rem 1rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <p
-              style={{
-                textAlign: "center",
-                color: "#cbd5e1",
-                fontSize: "0.98rem",
-                marginBottom: "0.7rem",
-              }}
-            >
-              Deseja um orçamento? Responda nosso formulário para entendermos melhor
-              sua necessidade.
-            </p>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSey4qxZ_fZpSRj72xZv_ZR_C-uVnmRRT_lqjPfeDvT7jN8SJg/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                margin: "0 auto",
-                padding: "0.6rem 1.2rem",
-                background: "linear-gradient(90deg, #22d3ee, #3b82f6)",
-                color: "#0f172a",
-                fontWeight: "bold",
-                borderRadius: "8px",
-                textDecoration: "none",
-                boxShadow: "0 2px 8px rgba(34,211,238,0.10)",
-                fontSize: "0.95rem",
-                transition: "all 0.2s",
-                textAlign: "center",
-              }}
-            >
-              Abrir formulário
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      {/* Footer */}
-      <footer
-        style={{
-          padding: "2rem",
-          textAlign: "center",
-          color: "#64748b",
-          fontSize: "0.9rem",
-          borderTop: "2px solid rgba(34, 211, 238, 0.4)",
-          background: "rgba(15, 23, 42, 0.8)",
-          boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-        }}
-      >
-        <p style={{ marginBottom: "0.5rem" }}>
-          © {new Date().getFullYear()} Geevheith Software Solutions. Todos os
-          direitos reservados.
-        </p>
-        <p style={{ fontSize: "0.85rem", color: "#475569" }}>
-          Desenvolvido por Getulio Moreira
-        </p>
+      <footer className="footer">
+        <p>© {new Date().getFullYear()} Geevheit Software Solutions. Todos os direitos reservados.</p>
+        <p style={{ fontSize: "0.85rem", marginTop: "0.25rem" }}>Desenvolvido por Getulio Moreira</p>
       </footer>
-    </main>
+
+      <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-float" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden>
+          <path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.200-3.4-8.500zM12 21.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-3.700 1 1-3.600-.2-.4a9.800 9.800 0 0 1-1.500-5.200C2.200 6.500 6.600 2.100 12 2.100c2.600 0 5.100 1 6.900 2.900a9.700 9.700 0 0 1 2.900 6.900c0 5.400-4.400 9.900-9.800 9.900zm5.400-7.400c-.3-.1-1.800-.9-2-1-.3-.1-.5-.1-.7.100l-.9 1.100c-.2.200-.3.200-.6.100-1.700-.8-2.800-1.500-3.900-3.400-.3-.5.300-.5.800-1.500.1-.2 0-.4 0-.5l-.9-2.100c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.200 2.100 3.300 5.200 4.600 1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2-1.400.2-.7.200-1.300.2-1.400-.1-.1-.3-.2-.6-.3z" />
+        </svg>
+      </a>
+    </>
   );
 }

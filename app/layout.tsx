@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,10 +12,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0b1220",
+};
+
 export const metadata: Metadata = {
-  title: "Geevheith Technology Solutions",
+  title: "Geevheit Software Solutions | Criação de Sites, Apps e Sistemas Web em São Paulo",
   description:
-    "Soluções digitais sob medida - Desenvolvimento de aplicativos, sistemas web e sites profissionais",
+    "Desenvolvimento de aplicativos Android/iOS, sistemas web, sites profissionais e landing pages que geram clientes. Peça seu orçamento gratuito pelo WhatsApp.",
+  keywords: [
+    "criação de sites",
+    "desenvolvimento de aplicativos",
+    "landing page",
+    "sistema web",
+    "São Paulo",
+  ],
+  openGraph: {
+    title: "Geevheit Software Solutions",
+    description:
+      "Sites, apps e sistemas sob medida para o seu negócio crescer. Orçamento gratuito.",
+    type: "website",
+    locale: "pt_BR",
+    images: ["/fotoapresentacao03.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -24,17 +46,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <head>
-        <style>{`
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          html { scroll-behavior: smooth; }
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #f1f5f9;
-          }
-        `}</style>
-      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
