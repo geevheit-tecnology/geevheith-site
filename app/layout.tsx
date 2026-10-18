@@ -19,6 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://geevheit.com.br"),
   title: "Geevheit Software Solutions | Criação de Sites, Apps e Sistemas Web em São Paulo",
   description:
     "Desenvolvimento de aplicativos Android/iOS, sistemas web, sites profissionais e landing pages que geram clientes. Peça seu orçamento gratuito pelo WhatsApp.",
