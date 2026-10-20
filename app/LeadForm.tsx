@@ -79,7 +79,6 @@ export default function LeadForm() {
           <span>O que você precisa? *</span>
           <select name="servico" required defaultValue="">
             <option value="" disabled>Selecione uma opção...</option>
-            <option value="Demonstração de Apps da Vitrine">📱 Demonstração de Apps da Vitrine</option>
             <option value="Aplicativo Android e iOS">📲 Aplicativo Mobile Sob Medida (Android & iOS)</option>
             <option value="Sistema Web e SaaS">🌐 Sistema Web / Plataforma SaaS</option>
             <option value="Site Profissional">💻 Site Profissional Moderno</option>
@@ -90,10 +89,10 @@ export default function LeadForm() {
       </div>
 
       <label>
-        <span>Conte brevemente sobre o seu projeto ou app</span>
+        <span>Conte brevemente sobre o seu projeto ou necessidade</span>
         <textarea
           name="mensagem"
-          placeholder="Ex: Quero um aplicativo para delivery com painel web para gerenciar pedidos e pagamento integrado..."
+          placeholder="Ex: Preciso de um aplicativo ou sistema para automatizar processos e gerenciar minha operação..."
         />
       </label>
 

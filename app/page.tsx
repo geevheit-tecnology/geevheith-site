@@ -38,72 +38,7 @@ const steps = [
   { t: "4. Publicação & Suporte Contínuo", d: "Lançamento oficial com garantia, suporte e acompanhamento pós-entrega." },
 ];
 
-const appsShowcase = [
-  {
-    id: "delivery",
-    title: "GeevFood Delivery & Gestão",
-    category: "Mobile App (Android / iOS) + Painel Web",
-    badge: "Disponível para Demonstração",
-    badgeClass: "badge-green",
-    image: "/mockup-delivery.jpg",
-    desc: "Aplicativo completo de delivery com cardápio dinâmico, checkout inteligente, integração direta com WhatsApp e PIX automático, acompanhado de painel web para gestão de pedidos em tempo real.",
-    tags: ["React Native", "Next.js", "PIX Automático", "Push Notification", "Cloud Database"],
-    features: [
-      "Rastreamento de pedidos em tempo real",
-      "Notificações push direto no celular",
-      "Painel de pedidos para cozinha e entregador",
-      "Gestão de cupons, taxas e cardápio"
-    ],
-    waMessage: "Olá Getulio! Gostaria de ver a demonstração do GeevFood Delivery."
-  },
-  {
-    id: "saas",
-    title: "GeevGestão Pro - SaaS Empresarial",
-    category: "Plataforma Web SaaS & Dashboard ERP",
-    badge: "Em Demonstração",
-    badgeClass: "badge-purple",
-    image: "/mockup-saas.jpg",
-    desc: "Sistema web moderno para gestão financeira, controle de clientes (CRM), faturamento, relatórios analíticos interativos e emissão de orçamentos para prestadores de serviço e empresas.",
-    tags: ["Next.js / React", "TypeScript", "PostgreSQL", "Gráficos Interativos", "Multi-tenancy"],
-    features: [
-      "Dashboard analítico com métricas em tempo real",
-      "Fluxo de caixa e conciliação financeira",
-      "Controle de clientes e histórico de compras",
-      "Exportação de relatórios em PDF e planilhas"
-    ],
-    waMessage: "Olá Getulio! Tenho interesse em testar a demonstração do GeevGestão Pro."
-  },
-  {
-    id: "agendamento",
-    title: "GeevAgendamento Pro",
-    category: "Mobile App & Web Multiplataforma",
-    badge: "Disponível para Teste",
-    badgeClass: "badge-green",
-    image: "/mockup-agendamento.jpg",
-    desc: "Plataforma de agendamento online com confirmação automática pelo WhatsApp para clínicas, barbearias, salões de beleza e consultorias, reduzindo faltas e organizando a agenda.",
-    tags: ["React Native", "Tailwind CSS", "WhatsApp Bot", "Google Calendar Sync", "Cloud"],
-    features: [
-      "Agendamento 24h sem necessidade de atendimento manual",
-      "Lembrete automático para clientes via WhatsApp",
-      "Controle de horários e comissões por profissional",
-      "Pagamento de sinal de reserva integrado"
-    ],
-    waMessage: "Olá Getulio! Quero agendar uma demonstração do GeevAgendamento Pro."
-  }
-];
 
-const techSkills = [
-  "React Native (Android & iOS)",
-  "Next.js 15 & React",
-  "TypeScript",
-  "Node.js & Express",
-  "Tailwind CSS",
-  "PostgreSQL & MySQL",
-  "Docker & DevOps",
-  "REST APIs & GraphQL",
-  "Vercel & AWS Cloud",
-  "Integrações de Pagamento (PIX, Stripe)"
-];
 
 export default function Home() {
   const jsonLd = {
@@ -138,9 +73,6 @@ export default function Home() {
             </div>
           </a>
           <nav className="nav" aria-label="Navegação Principal">
-            <a href="#vitrine" className="nav-highlight">
-              📱 Vitrine de Apps
-            </a>
             <a href="#services">Serviços</a>
             <a href="#process">Como funciona</a>
             <a href="#about">Sobre</a>
@@ -177,8 +109,8 @@ export default function Home() {
                   <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
                     <span>Falar no WhatsApp</span>
                   </a>
-                  <a href="#vitrine" className="btn btn-primary">
-                    <span>Ver Vitrine de Apps</span>
+                  <a href="#services" className="btn btn-primary">
+                    <span>Conhecer Serviços</span>
                   </a>
                   <a href="#orcamento" className="btn btn-outline">
                     Pedir orçamento
@@ -202,147 +134,6 @@ export default function Home() {
                   style={{ width: "100%", height: "auto" }} 
                 />
               </div>
-            </div>
-
-            {/* Banner de Estatísticas e Destaques */}
-            <div className="stats-banner">
-              <div className="stat-item">
-                <span className="stat-num grad-text">+15</span>
-                <span className="stat-label">Projetos Entregues</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-num grad-text">Android & iOS</span>
-                <span className="stat-label">Mobile Multiplataforma</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-num grad-text">100%</span>
-                <span className="stat-label">Código Limpo & Autoral</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-num grad-text">24/7</span>
-                <span className="stat-label">Suporte & Acompanhamento</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Tech Stack Strip */}
-        <section className="tech-strip">
-          <div className="container">
-            <div className="tech-pills">
-              {techSkills.map((tech) => (
-                <span key={tech} className="tech-pill">
-                  ⚡ {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* NOVA SEÇÃO: Vitrine de Aplicativos & Demonstrações */}
-        <section id="vitrine" className="section section-alt vitrine-section">
-          <div className="container">
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-              <span className="vitrine-badge-top">📱 Portfólio & Demonstrações Interativas</span>
-              <h2 className="section-title grad-text">Vitrine de Aplicativos</h2>
-              <p className="section-sub">
-                Explore demonstrações práticas dos nossos aplicativos e sistemas. Veja a qualidade visual, velocidade e recursos que podemos implementar para a sua empresa.
-              </p>
-            </div>
-
-            <div className="vitrine-grid">
-              {appsShowcase.map((app) => (
-                <article key={app.id} className="vitrine-card">
-                  <div className="vitrine-img-wrap">
-                    <span className={`vitrine-status ${app.badgeClass}`}>{app.badge}</span>
-                    <Image 
-                      src={app.image} 
-                      alt={`Demonstração do aplicativo ${app.title}`}
-                      width={640} 
-                      height={360} 
-                      loading="lazy"
-                    />
-                  </div>
-
-                  <div className="vitrine-body">
-                    <span className="vitrine-category">{app.category}</span>
-                    <h3 className="vitrine-title">{app.title}</h3>
-                    <p className="vitrine-desc">{app.desc}</p>
-
-                    <div className="vitrine-tags">
-                      {app.tags.map((tag) => (
-                        <span key={tag} className="vitrine-tag">{tag}</span>
-                      ))}
-                    </div>
-
-                    <ul className="vitrine-features">
-                      {app.features.map((feat) => (
-                        <li key={feat}>{feat}</li>
-                      ))}
-                    </ul>
-
-                    <div className="vitrine-actions">
-                      <a 
-                        href={`https://wa.me/5511972808075?text=${encodeURIComponent(app.waMessage)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-primary btn-sm"
-                      >
-                        📲 Ver Demonstração
-                      </a>
-                      <a 
-                        href="#orcamento"
-                        className="btn btn-outline btn-sm"
-                      >
-                        Pedir Similar
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-
-              {/* Card Especial para Encomendar um App Personalizado */}
-              <article className="vitrine-card vitrine-custom-card">
-                <div className="vitrine-custom-icon">
-                  💡
-                </div>
-                <span className="vitrine-category">Desenvolvimento Sob Medida</span>
-                <h3 className="vitrine-title" style={{ marginTop: "0.25rem" }}>
-                  Tem uma ideia de aplicativo?
-                </h3>
-                <p className="vitrine-desc" style={{ maxWidth: 320 }}>
-                  Criamos seu aplicativo exclusivo do zero para Android e iOS, com design personalizado, banco de dados em nuvem e publicação completa nas lojas oficiais.
-                </p>
-                <div style={{ marginTop: "1rem", width: "100%", maxWidth: 280 }}>
-                  <a 
-                    href={`https://wa.me/5511972808075?text=${encodeURIComponent("Olá Getulio! Tenho uma ideia de aplicativo novo e gostaria de fazer um orçamento.")}`}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn btn-whatsapp" 
-                    style={{ width: "100%" }}
-                  >
-                    💬 Tirar ideia do papel
-                  </a>
-                </div>
-              </article>
-            </div>
-
-            {/* Banner CTA da Vitrine */}
-            <div className="demo-cta-box">
-              <div className="demo-cta-content">
-                <h3 className="grad-text">Quer testar um dos aplicativos no seu celular?</h3>
-                <p>
-                  Agende uma demonstração ao vivo ou receba o link de testes direto no seu WhatsApp para experimentar a fluidez de nossas soluções.
-                </p>
-              </div>
-              <a 
-                href={`https://wa.me/5511972808075?text=${encodeURIComponent("Olá Getulio! Gostaria de testar uma demonstração de aplicativo no meu celular.")}`}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="btn btn-whatsapp"
-              >
-                Solicitar Teste Agora
-              </a>
             </div>
           </div>
         </section>
