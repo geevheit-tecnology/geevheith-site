@@ -8,18 +8,42 @@ export default function LeadForm() {
   const [sent, setSent] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
 
     const f = new FormData(e.currentTarget);
+    const nome = String(f.get("nome") || "").trim();
+    const telefone = String(f.get("telefone") || "").trim();
+    const email = String(f.get("email") || "").trim();
+    const servico = String(f.get("servico") || "").trim();
+    const mensagem = String(f.get("mensagem") || "").trim();
+
+    // 1. Enviar para a Central GeevheitNeural em segundo plano
+    try {
+      await fetch("https://geevheit-api.onrender.com/v1/intake", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_name: nome,
+          contact: telefone ? `${telefone}${email ? " | " + email : ""}` : email,
+          type: "orcamento",
+          description: `Novo Orçamento pelo Site Oficial: ${servico}. Detalhes: ${mensagem || "Não informado"}`,
+          website: "" // Proteção honeypot
+        }),
+      });
+    } catch {
+      // Falhas no fetch silenciosas para não impedir a abertura do WhatsApp
+    }
+
+    // 2. Montar texto e abrir o WhatsApp do Getulio
     const text =
       `🚀 *Novo Contato pelo Site - Geevheit*\n\n` +
-      `👤 *Nome:* ${f.get("nome")}\n` +
-      `📱 *Telefone/WhatsApp:* ${f.get("telefone")}\n` +
-      `📧 *E-mail:* ${f.get("email") || "Não informado"}\n` +
-      `💼 *Serviço de Interesse:* ${f.get("servico")}\n` +
-      `📝 *Detalhes do Projeto:* ${f.get("mensagem") || "Não detalhado"}`;
+      `👤 *Nome:* ${nome}\n` +
+      `📱 *Telefone/WhatsApp:* ${telefone}\n` +
+      `📧 *E-mail:* ${email || "Não informado"}\n` +
+      `💼 *Serviço de Interesse:* ${servico}\n` +
+      `📝 *Detalhes do Projeto:* ${mensagem || "Não detalhado"}`;
 
     window.open(
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,
